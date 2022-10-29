@@ -8,7 +8,7 @@ namespace EssentialUtils
         public bool UnscaledTime { get; set; }
 
         bool active;
-        bool reverse = false;
+        bool reverse = true;
         float crossfadeDuration;
         float crossfadeElapsed;
 
