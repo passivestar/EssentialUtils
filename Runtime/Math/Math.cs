@@ -56,5 +56,19 @@ namespace EssentialUtils
         {
             return (x % m + m) % m;
         }
+
+        public static float Follow(float current, float target, ref float acceleration, ref float velocity,
+            float accelerationMultiplier, float damping, AnimationCurve curve, float delta)
+        {
+            var diff = target - current;
+            if (curve != null)
+            {
+                diff = curve.Evaluate(diff);
+            }
+            acceleration = diff * accelerationMultiplier;
+            velocity += acceleration * delta;
+            velocity = Mathf.Lerp(velocity, 0, damping * delta);
+            return current + velocity * delta;
+        }
     }
 }
