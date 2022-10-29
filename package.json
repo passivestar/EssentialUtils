@@ -1,0 +1,15 @@
+{
+    "name": "com.passivestar.essentialutils",
+    "version": "0.1.0",
+    "displayName": "Essential Utils",
+    "description": "A library of useful utility classes for all sorts of Unity things",
+    "license": "See LICENSE.md",
+    "unity": "2022.1",
+    "keywords": [
+        "Util"
+    ],
+    "author": {
+        "name": "passivestar",
+        "url": "https://discord.gg/pPHQ5HQ"
+    }
+}
