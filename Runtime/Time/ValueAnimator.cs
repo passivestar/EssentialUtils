@@ -36,7 +36,7 @@ namespace EssentialUtils
         Action onFinishedInReverse;
         Action onUpdate;
 
-        AnimationCurve _currentCurve;
+        AnimationCurve currentCurve;
 
         public ValueAnimator(float duration = 1f, bool loop = false, bool unscaledTime = false,
             AnimationCurve curve = null, AnimationCurve reverseCurve = null,
@@ -110,11 +110,11 @@ namespace EssentialUtils
         {
             if (reverseCurve != null && inReverse)
             {
-                _currentCurve = reverseCurve;
+                currentCurve = reverseCurve;
             }
             else if (curve != null && !inReverse)
             {
-                _currentCurve = curve;
+                currentCurve = curve;
             }
 
             PlayingInReverse = inReverse;
