@@ -4,9 +4,11 @@ namespace EssentialUtils
 {
     public abstract class Transition
     {
-        public float GetDelta(bool unscaledTime)
+        public bool UnscaledTime { get; set; }
+
+        public float GetDelta()
         {
-            return unscaledTime ? Time.unscaledDeltaTime : Time.deltaTime;
+            return UnscaledTime ? Time.unscaledDeltaTime : Time.deltaTime;
         }
     }
 }

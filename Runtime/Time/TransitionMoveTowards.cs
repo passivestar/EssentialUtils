@@ -4,96 +4,193 @@ namespace EssentialUtils
 {
     public class TransitionMoveTowardsFloat : Transition
     {
-        float currentValue;
+        public float CurrentValue { get; set; }
+        public float TargetValue { get; set; }
+        public float Speed { get; set; }
 
-        public void SetValue(float newValue) => currentValue = newValue;
-
-        public float Run(float newValue, float speed = 1f, bool unscaledTime = false)
+        public TransitionMoveTowardsFloat(float initialValue = 0f, float speed = 1f, bool unscaledTime = false)
         {
-            return currentValue = Mathf.MoveTowards(currentValue, newValue, speed * GetDelta(unscaledTime));
+            CurrentValue = initialValue;
+            Speed = speed;
+            UnscaledTime = unscaledTime;
+        }
+
+        public float Run(float? targetValue = null, float? speed = null, bool? unscaledTime = null)
+        {
+            if (targetValue != null) TargetValue = (float)targetValue;
+            if (speed != null) Speed = (float)speed;
+            if (unscaledTime != null) UnscaledTime = (bool)unscaledTime;
+
+            return CurrentValue = Mathf.MoveTowards(CurrentValue, TargetValue, Speed * GetDelta());
         }
     }
 
     public class TransitionMoveTowardsAngle : Transition
     {
-        float currentValue;
+        public float CurrentValue { get; set; }
+        public float TargetValue { get; set; }
+        public float Speed { get; set; }
 
-        public void SetValue(float newValue) => currentValue = newValue;
-
-        public float Run(float newValue, float speed = 1f, bool unscaledTime = false)
+        public TransitionMoveTowardsAngle(float initialValue = 0f, float speed = 1f, bool unscaledTime = false)
         {
-            return currentValue = Mathf.MoveTowardsAngle(currentValue, newValue, speed * GetDelta(unscaledTime));
+            CurrentValue = initialValue;
+            Speed = speed;
+            UnscaledTime = unscaledTime;
+        }
+
+        public float Run(float? targetValue = null, float? speed = null, bool? unscaledTime = null)
+        {
+            if (targetValue != null) TargetValue = (float)targetValue;
+            if (speed != null) Speed = (float)speed;
+            if (unscaledTime != null) UnscaledTime = (bool)unscaledTime;
+
+            return CurrentValue = Mathf.MoveTowardsAngle(CurrentValue, TargetValue, Speed * GetDelta());
         }
     }
 
     public class TransitionMoveTowardsVector2 : Transition
     {
-        Vector2 currentValue;
+        public Vector2 CurrentValue { get; set; }
+        public Vector2 TargetValue { get; set; }
+        public float Speed { get; set; }
 
-        public void SetValue(Vector2 newValue) => currentValue = newValue;
-
-        public Vector2 Run(Vector2 newValue, float speed = 1f, bool unscaledTime = false)
+        public TransitionMoveTowardsVector2(Vector2 initialValue = new Vector2(), float speed = 1f, bool unscaledTime = false)
         {
-            return currentValue = Vector2.MoveTowards(currentValue, newValue, speed * GetDelta(unscaledTime));
+            CurrentValue = initialValue;
+            Speed = speed;
+            UnscaledTime = unscaledTime;
+        }
+
+        public Vector2 Run(Vector2? targetValue = null, float? speed = null, bool? unscaledTime = null)
+        {
+            if (targetValue != null) TargetValue = (Vector2)targetValue;
+            if (speed != null) Speed = (float)speed;
+            if (unscaledTime != null) UnscaledTime = (bool)unscaledTime;
+
+            return CurrentValue = Vector2.MoveTowards(CurrentValue, TargetValue, Speed * GetDelta());
         }
     }
 
     public class TransitionMoveTowardsVector3 : Transition
     {
-        Vector3 currentValue;
+        public Vector3 CurrentValue { get; set; }
+        public Vector3 TargetValue { get; set; }
+        public float Speed { get; set; }
 
-        public void SetValue(Vector3 newValue) => currentValue = newValue;
-
-        public Vector3 Run(Vector3 newValue, float speed = 1f, bool unscaledTime = false)
+        public TransitionMoveTowardsVector3(Vector3 initialValue = new Vector3(), float speed = 1f, bool unscaledTime = false)
         {
-            return currentValue = Vector3.MoveTowards(currentValue, newValue, speed * GetDelta(unscaledTime));
+            CurrentValue = initialValue;
+            Speed = speed;
+            UnscaledTime = unscaledTime;
+        }
+
+        public Vector3 Run(Vector3? targetValue = null, float? speed = null, bool? unscaledTime = null)
+        {
+            if (targetValue != null) TargetValue = (Vector3)targetValue;
+            if (speed != null) Speed = (float)speed;
+            if (unscaledTime != null) UnscaledTime = (bool)unscaledTime;
+
+            return CurrentValue = Vector3.MoveTowards(CurrentValue, TargetValue, Speed * GetDelta());
         }
     }
 
     public class TransitionMoveTowardsVector4 : Transition
     {
-        Vector4 currentValue;
+        public Vector4 CurrentValue { get; set; }
+        public Vector4 TargetValue { get; set; }
+        public float Speed { get; set; }
 
-        public void SetValue(Vector4 newValue) => currentValue = newValue;
-
-        public Vector4 Run(Vector4 newValue, float speed = 1f, bool unscaledTime = false)
+        public TransitionMoveTowardsVector4(Vector4 initialValue = new Vector4(), float speed = 1f, bool unscaledTime = false)
         {
-            return currentValue = Vector4.MoveTowards(currentValue, newValue, speed * GetDelta(unscaledTime));
+            CurrentValue = initialValue;
+            Speed = speed;
+            UnscaledTime = unscaledTime;
+        }
+
+        public Vector4 Run(Vector4? targetValue = null, float? speed = null, bool? unscaledTime = null)
+        {
+            if (targetValue != null) TargetValue = (Vector4)targetValue;
+            if (speed != null) Speed = (float)speed;
+            if (unscaledTime != null) UnscaledTime = (bool)unscaledTime;
+
+            return CurrentValue = Vector4.MoveTowards(CurrentValue, TargetValue, Speed * GetDelta());
         }
     }
 
     public class TransitionMoveTowardsQuaternion : Transition
     {
-        Quaternion currentValue;
+        public Quaternion CurrentValue { get; set; }
+        public Quaternion TargetValue { get; set; }
+        public float Speed { get; set; }
 
-        public void SetValue(Quaternion newValue) => currentValue = newValue;
-
-        public Quaternion Run(Quaternion newValue, float speed = 1f, bool unscaledTime = false)
+        public TransitionMoveTowardsQuaternion(Quaternion initialValue = new Quaternion(), float speed = 1f, bool unscaledTime = false)
         {
-            return currentValue = Quaternion.RotateTowards(currentValue, newValue, speed * GetDelta(unscaledTime));
+            CurrentValue = initialValue;
+            Speed = speed;
+            UnscaledTime = unscaledTime;
+        }
+
+        public Quaternion Run(Quaternion? targetValue = null, float? speed = null, bool? unscaledTime = null)
+        {
+            if (targetValue != null) TargetValue = (Quaternion)targetValue;
+            if (speed != null) Speed = (float)speed;
+            if (unscaledTime != null) UnscaledTime = (bool)unscaledTime;
+
+            return CurrentValue = Quaternion.RotateTowards(CurrentValue, TargetValue, Speed * GetDelta());
         }
     }
 
     public class TransitionMoveTowardsTransform : Transition
     {
-        public bool affectPosition = true;
-        public bool affectRotation = true;
-        public bool affectScale = true;
+        public Transform CurrentValue { get; set; }
+        public Transform TargetValue { get; set; }
+        public float Speed { get; set; }
 
-        public Transform Run(Transform transform, Transform newValue, float speed = 1f, bool unscaledTime = false)
+        public bool AffectPosition { get; set; }
+        public bool AffectRotation { get; set; }
+        public bool AffectScale { get; set; }
+
+        public TransitionMoveTowardsTransform(Transform initialValue, float speed = 1f, bool unscaledTime = false,
+            bool affectPosition = true, bool affectRotation = true, bool affectScale = true)
         {
-            var factor = speed * GetDelta(unscaledTime);
+            CurrentValue = initialValue;
+            Speed = speed;
+            UnscaledTime = unscaledTime;
 
-            if (affectPosition)
-                transform.position = Vector3.MoveTowards(transform.position, newValue.position, factor);
+            AffectPosition = affectPosition;
+            AffectRotation = affectRotation;
+            AffectScale = affectScale;
+        }
 
-            if (affectRotation)
-                transform.rotation = Quaternion.RotateTowards(transform.rotation, newValue.rotation, factor * Mathf.Rad2Deg);
+        public Transform Run(Transform targetValue = null, float? speed = null, bool? unscaledTime = null)
+        {
+            if (TargetValue == null)
+            {
+                return CurrentValue;
+            }
 
-            if (affectScale)
-                transform.localScale = Vector3.MoveTowards(transform.localScale, newValue.localScale, factor);
+            if (targetValue != null) TargetValue = targetValue;
+            if (speed != null) Speed = (float)speed;
+            if (unscaledTime != null) UnscaledTime = (bool)unscaledTime;
 
-            return transform;
+            var factor = Speed * GetDelta();
+
+            if (AffectPosition)
+            {
+                CurrentValue.position = Vector3.MoveTowards(CurrentValue.position, TargetValue.position, factor);
+            }
+
+            if (AffectRotation)
+            {
+                CurrentValue.rotation = Quaternion.RotateTowards(CurrentValue.rotation, TargetValue.rotation, factor);
+            }
+
+            if (AffectScale)
+            {
+                CurrentValue.localScale = Vector3.MoveTowards(CurrentValue.localScale, TargetValue.localScale, factor);
+            }
+
+            return CurrentValue;
         }
     }
 }

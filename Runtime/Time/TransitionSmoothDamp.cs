@@ -4,53 +4,117 @@ namespace EssentialUtils
 {
     public class TransitionSmoothDampFloat : Transition
     {
-        float currentValue;
+        public float CurrentValue { get; set; }
+        public float TargetValue { get; set; }
+        public float SmoothTime { get; set; }
+        public float MaxSpeed { get; set; }
+
         float currentVelocity;
 
-        public void SetValue(float newValue) => currentValue = newValue;
-
-        public float Evaluate(float newValue, float smoothTime = .5f, float maxSpeed = 1000f)
+        public TransitionSmoothDampFloat(float initialValue = 0f, float smoothTime = 1f,
+            float maxSpeed = 1000f, bool unscaledTime = false)
         {
-            return currentValue = Mathf.SmoothDamp(currentValue, newValue, ref currentVelocity, smoothTime, maxSpeed);
+            CurrentValue = initialValue;
+            SmoothTime = smoothTime;
+            MaxSpeed = maxSpeed;
+            UnscaledTime = unscaledTime;
+        }
+
+        public float Run(float? targetValue = null, float? smoothTime = null, float? maxSpeed = null, bool? unscaledTime = null)
+        {
+            if (targetValue != null) TargetValue = (float)targetValue;
+            if (smoothTime != null) SmoothTime = (float)smoothTime;
+            if (maxSpeed != null) MaxSpeed = (float)maxSpeed;
+            if (unscaledTime != null) UnscaledTime = (bool)unscaledTime;
+
+            return CurrentValue = Mathf.SmoothDamp(CurrentValue, TargetValue, ref currentVelocity, SmoothTime, MaxSpeed, GetDelta());
         }
     }
 
     public class TransitionSmoothDampAngle : Transition
     {
-        float currentValue;
+        public float CurrentValue { get; set; }
+        public float TargetValue { get; set; }
+        public float SmoothTime { get; set; }
+        public float MaxSpeed { get; set; }
+
         float currentVelocity;
 
-        public void SetValue(float newValue) => currentValue = newValue;
-
-        public float Evaluate(float newValue, float smoothTime = .5f, float maxSpeed = 1000f)
+        public TransitionSmoothDampAngle(float initialValue = 0f, float smoothTime = 1f,
+            float maxSpeed = 1000f, bool unscaledTime = false)
         {
-            return currentValue = Mathf.SmoothDampAngle(currentValue, newValue, ref currentVelocity, smoothTime, maxSpeed);
+            CurrentValue = initialValue;
+            SmoothTime = smoothTime;
+            MaxSpeed = maxSpeed;
+            UnscaledTime = unscaledTime;
+        }
+
+        public float Run(float? targetValue = null, float? smoothTime = null, float? maxSpeed = null, bool? unscaledTime = null)
+        {
+            if (targetValue != null) TargetValue = (float)targetValue;
+            if (smoothTime != null) SmoothTime = (float)smoothTime;
+            if (maxSpeed != null) MaxSpeed = (float)maxSpeed;
+            if (unscaledTime != null) UnscaledTime = (bool)unscaledTime;
+
+            return CurrentValue = Mathf.SmoothDampAngle(CurrentValue, TargetValue, ref currentVelocity, SmoothTime, MaxSpeed, GetDelta());
         }
     }
 
     public class TransitionSmoothDampVector2 : Transition
     {
-        Vector2 currentValue;
+        public Vector2 CurrentValue { get; set; }
+        public Vector2 TargetValue { get; set; }
+        public float SmoothTime { get; set; }
+        public float MaxSpeed { get; set; }
+
         Vector2 currentVelocity;
 
-        public void SetValue(Vector2 newValue) => currentValue = newValue;
-
-        public Vector2 Evaluate(Vector2 newValue, float smoothTime = .5f, float maxSpeed = 1000f)
+        public TransitionSmoothDampVector2(Vector2 initialValue = new Vector2(), float smoothTime = 1f,
+            float maxSpeed = 1000f, bool unscaledTime = false)
         {
-            return currentValue = Vector2.SmoothDamp(currentValue, newValue, ref currentVelocity, smoothTime, maxSpeed);
+            CurrentValue = initialValue;
+            SmoothTime = smoothTime;
+            MaxSpeed = maxSpeed;
+            UnscaledTime = unscaledTime;
+        }
+
+        public Vector2 Run(Vector2? targetValue = null, float? smoothTime = null, float? maxSpeed = null, bool? unscaledTime = null)
+        {
+            if (targetValue != null) TargetValue = (Vector2)targetValue;
+            if (smoothTime != null) SmoothTime = (float)smoothTime;
+            if (maxSpeed != null) MaxSpeed = (float)maxSpeed;
+            if (unscaledTime != null) UnscaledTime = (bool)unscaledTime;
+
+            return CurrentValue = Vector2.SmoothDamp(CurrentValue, TargetValue, ref currentVelocity, SmoothTime, MaxSpeed, GetDelta());
         }
     }
 
     public class TransitionSmoothDampVector3 : Transition
     {
-        Vector3 currentValue;
+        public Vector3 CurrentValue { get; set; }
+        public Vector3 TargetValue { get; set; }
+        public float SmoothTime { get; set; }
+        public float MaxSpeed { get; set; }
+
         Vector3 currentVelocity;
 
-        public void SetValue(Vector3 newValue) => currentValue = newValue;
-
-        public Vector3 Evaluate(Vector3 newValue, float smoothTime = .5f, float maxSpeed = 1000f)
+        public TransitionSmoothDampVector3(Vector3 initialValue = new Vector3(), float smoothTime = 1f,
+            float maxSpeed = 1000f, bool unscaledTime = false)
         {
-            return currentValue = Vector3.SmoothDamp(currentValue, newValue, ref currentVelocity, smoothTime, maxSpeed);
+            CurrentValue = initialValue;
+            SmoothTime = smoothTime;
+            MaxSpeed = maxSpeed;
+            UnscaledTime = unscaledTime;
+        }
+
+        public Vector3 Run(Vector3? targetValue = null, float? smoothTime = null, float? maxSpeed = null, bool? unscaledTime = null)
+        {
+            if (targetValue != null) TargetValue = (Vector3)targetValue;
+            if (smoothTime != null) SmoothTime = (float)smoothTime;
+            if (maxSpeed != null) MaxSpeed = (float)maxSpeed;
+            if (unscaledTime != null) UnscaledTime = (bool)unscaledTime;
+
+            return CurrentValue = Vector3.SmoothDamp(CurrentValue, TargetValue, ref currentVelocity, SmoothTime, MaxSpeed, GetDelta());
         }
     }
 }
