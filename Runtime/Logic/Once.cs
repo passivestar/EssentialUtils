@@ -5,6 +5,8 @@ namespace EssentialUtils
     public class Once
     {
         public Action ActionRun { get; private set; }
+        public Action ActionReset { get; private set; }
+
         public bool WasCalled { get; private set; }
 
         public Action OnRun { get; set; }
@@ -13,6 +15,7 @@ namespace EssentialUtils
         {
             OnRun = onRun;
             ActionRun = () => Run();
+            ActionReset = () => Reset();
         }
 
         public void Reset() => WasCalled = false;
