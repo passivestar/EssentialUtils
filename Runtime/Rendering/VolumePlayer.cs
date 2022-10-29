@@ -1,3 +1,4 @@
+#if USE_SRP
 using UnityEngine;
 using UnityEngine.Rendering;
 
@@ -108,3 +109,4 @@ namespace EssentialUtils
         }
     }
 }
+#endif
