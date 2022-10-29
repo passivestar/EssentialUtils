@@ -4,11 +4,11 @@ namespace EssentialUtils
 {
     public class TransitionLerpFloat : Transition
     {
-        public float CurrentValue { get; set; }
+        public float? CurrentValue { get; set; }
         public float TargetValue { get; set; }
         public float Speed { get; set; }
 
-        public TransitionLerpFloat(float initialValue = 0f, float speed = 1f, bool unscaledTime = false)
+        public TransitionLerpFloat(float? initialValue = null, float speed = 1f, bool unscaledTime = false)
         {
             CurrentValue = initialValue;
             Speed = speed;
@@ -18,20 +18,22 @@ namespace EssentialUtils
         public float Run(float? targetValue = null, float? speed = null, bool? unscaledTime = null)
         {
             if (targetValue != null) TargetValue = (float)targetValue;
+            if (CurrentValue == null) CurrentValue = TargetValue;
             if (speed != null) Speed = (float)speed;
             if (unscaledTime != null) UnscaledTime = (bool)unscaledTime;
 
-            return CurrentValue = Mathf.Lerp(CurrentValue, TargetValue, Speed * GetDelta());
+            CurrentValue = Mathf.Lerp((float)CurrentValue, TargetValue, Speed * GetDelta());
+            return (float)CurrentValue;
         }
     }
 
     public class TransitionLerpAngle : Transition
     {
-        public float CurrentValue { get; set; }
+        public float? CurrentValue { get; set; }
         public float TargetValue { get; set; }
         public float Speed { get; set; }
 
-        public TransitionLerpAngle(float initialValue = 0f, float speed = 1f, bool unscaledTime = false)
+        public TransitionLerpAngle(float? initialValue = null, float speed = 1f, bool unscaledTime = false)
         {
             CurrentValue = initialValue;
             Speed = speed;
@@ -41,20 +43,22 @@ namespace EssentialUtils
         public float Run(float? targetValue = null, float? speed = null, bool? unscaledTime = null)
         {
             if (targetValue != null) TargetValue = (float)targetValue;
+            if (CurrentValue == null) CurrentValue = TargetValue;
             if (speed != null) Speed = (float)speed;
             if (unscaledTime != null) UnscaledTime = (bool)unscaledTime;
 
-            return CurrentValue = Mathf.LerpAngle(CurrentValue, TargetValue, Speed * GetDelta());
+            CurrentValue = Mathf.LerpAngle((float)CurrentValue, TargetValue, Speed * GetDelta());
+            return (float)CurrentValue;
         }
     }
 
     public class TransitionLerpColor : Transition
     {
-        public Color CurrentValue { get; set; }
+        public Color? CurrentValue { get; set; }
         public Color TargetValue { get; set; }
         public float Speed { get; set; }
 
-        public TransitionLerpColor(Color initialValue = new Color(), float speed = 1f, bool unscaledTime = false)
+        public TransitionLerpColor(Color? initialValue = null, float speed = 1f, bool unscaledTime = false)
         {
             CurrentValue = initialValue;
             Speed = speed;
@@ -64,20 +68,22 @@ namespace EssentialUtils
         public Color Run(Color? targetValue = null, float? speed = null, bool? unscaledTime = null)
         {
             if (targetValue != null) TargetValue = (Color)targetValue;
+            if (CurrentValue == null) CurrentValue = TargetValue;
             if (speed != null) Speed = (float)speed;
             if (unscaledTime != null) UnscaledTime = (bool)unscaledTime;
 
-            return CurrentValue = Color.Lerp(CurrentValue, TargetValue, Speed * GetDelta());
+            CurrentValue = Color.Lerp((Color)CurrentValue, TargetValue, Speed * GetDelta());
+            return (Color)CurrentValue;
         }
     }
 
     public class TransitionLerpVector2 : Transition
     {
-        public Vector2 CurrentValue { get; set; }
+        public Vector2? CurrentValue { get; set; }
         public Vector2 TargetValue { get; set; }
         public float Speed { get; set; }
 
-        public TransitionLerpVector2(Vector2 initialValue = new Vector2(), float speed = 1f, bool unscaledTime = false)
+        public TransitionLerpVector2(Vector2? initialValue = null, float speed = 1f, bool unscaledTime = false)
         {
             CurrentValue = initialValue;
             Speed = speed;
@@ -87,20 +93,22 @@ namespace EssentialUtils
         public Vector2 Run(Vector2? targetValue = null, float? speed = null, bool? unscaledTime = null)
         {
             if (targetValue != null) TargetValue = (Vector2)targetValue;
+            if (CurrentValue == null) CurrentValue = TargetValue;
             if (speed != null) Speed = (float)speed;
             if (unscaledTime != null) UnscaledTime = (bool)unscaledTime;
 
-            return CurrentValue = Vector2.Lerp(CurrentValue, TargetValue, Speed * GetDelta());
+            CurrentValue = Vector2.Lerp((Vector2)CurrentValue, TargetValue, Speed * GetDelta());
+            return (Vector2)CurrentValue;
         }
     }
 
     public class TransitionLerpVector3 : Transition
     {
-        public Vector3 CurrentValue { get; set; }
+        public Vector3? CurrentValue { get; set; }
         public Vector3 TargetValue { get; set; }
         public float Speed { get; set; }
 
-        public TransitionLerpVector3(Vector3 initialValue = new Vector3(), float speed = 1f, bool unscaledTime = false)
+        public TransitionLerpVector3(Vector3? initialValue = null, float speed = 1f, bool unscaledTime = false)
         {
             CurrentValue = initialValue;
             Speed = speed;
@@ -110,20 +118,22 @@ namespace EssentialUtils
         public Vector3 Run(Vector3? targetValue = null, float? speed = null, bool? unscaledTime = null)
         {
             if (targetValue != null) TargetValue = (Vector3)targetValue;
+            if (CurrentValue == null) CurrentValue = TargetValue;
             if (speed != null) Speed = (float)speed;
             if (unscaledTime != null) UnscaledTime = (bool)unscaledTime;
 
-            return CurrentValue = Vector3.Lerp(CurrentValue, TargetValue, Speed * GetDelta());
+            CurrentValue = Vector3.Lerp((Vector3)CurrentValue, TargetValue, Speed * GetDelta());
+            return (Vector3)CurrentValue;
         }
     }
 
     public class TransitionLerpVector4 : Transition
     {
-        public Vector4 CurrentValue { get; set; }
+        public Vector4? CurrentValue { get; set; }
         public Vector4 TargetValue { get; set; }
         public float Speed { get; set; }
 
-        public TransitionLerpVector4(Vector4 initialValue = new Vector4(), float speed = 1f, bool unscaledTime = false)
+        public TransitionLerpVector4(Vector4? initialValue = null, float speed = 1f, bool unscaledTime = false)
         {
             CurrentValue = initialValue;
             Speed = speed;
@@ -133,20 +143,22 @@ namespace EssentialUtils
         public Vector4 Run(Vector4? targetValue = null, float? speed = null, bool? unscaledTime = null)
         {
             if (targetValue != null) TargetValue = (Vector4)targetValue;
+            if (CurrentValue == null) CurrentValue = TargetValue;
             if (speed != null) Speed = (float)speed;
             if (unscaledTime != null) UnscaledTime = (bool)unscaledTime;
 
-            return CurrentValue = Vector4.Lerp(CurrentValue, TargetValue, Speed * GetDelta());
+            CurrentValue = Vector4.Lerp((Vector4)CurrentValue, TargetValue, Speed * GetDelta());
+            return (Vector4)CurrentValue;
         }
     }
 
     public class TransitionLerpQuaternion : Transition
     {
-        public Quaternion CurrentValue { get; set; }
+        public Quaternion? CurrentValue { get; set; }
         public Quaternion TargetValue { get; set; }
         public float Speed { get; set; }
 
-        public TransitionLerpQuaternion(Quaternion initialValue = new Quaternion(), float speed = 1f, bool unscaledTime = false)
+        public TransitionLerpQuaternion(Quaternion? initialValue = null, float speed = 1f, bool unscaledTime = false)
         {
             CurrentValue = initialValue;
             Speed = speed;
@@ -156,10 +168,12 @@ namespace EssentialUtils
         public Quaternion Run(Quaternion? targetValue = null, float? speed = null, bool? unscaledTime = null)
         {
             if (targetValue != null) TargetValue = (Quaternion)targetValue;
+            if (CurrentValue == null) CurrentValue = TargetValue;
             if (speed != null) Speed = (float)speed;
             if (unscaledTime != null) UnscaledTime = (bool)unscaledTime;
 
-            return CurrentValue = Quaternion.Slerp(CurrentValue, TargetValue, Speed * GetDelta());
+            CurrentValue = Quaternion.Slerp((Quaternion)CurrentValue, TargetValue, Speed * GetDelta());
+            return (Quaternion)CurrentValue;
         }
     }
 
