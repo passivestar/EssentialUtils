@@ -6,6 +6,8 @@ namespace EssentialUtils
     {
         public Action ActionRun { get; private set; }
 
+        public object LastValue { get; private set; }
+
         public Action OnChanged { get; set; }
         public Action OnUnchanged { get; set; }
 
@@ -19,6 +21,7 @@ namespace EssentialUtils
 
         public bool Run(object value)
         {
+            LastValue = value;
             var valueChanged = previousValue != null && !value.Equals(previousValue);
             previousValue = value;
             if (valueChanged)
