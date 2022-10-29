@@ -17,13 +17,13 @@ namespace EssentialUtils
             };
         }
 
-        public static void DrawText(Vector3 position, string text, Color? color = null)
+        public static void DrawText(Vector3 position, object text, Color? color = null)
         {
             onNextDrawGizmos += () =>
             {
                 color ??= Color.black;
                 GUI.color = (Color)color;
-                Handles.Label(position, text);
+                Handles.Label(position, text.ToString());
             };
         }
     }
