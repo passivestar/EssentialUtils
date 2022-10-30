@@ -4,9 +4,16 @@ namespace EssentialUtils
 {
     public class Math
     {
-        public static float MapRange(float value, float valueMin, float valueMax, float min, float max, AnimationCurve curve = null)
+        public static float MapRange(float value, float valueMin, float valueMax, float min, float max)
         {
            var t = Mathf.InverseLerp(valueMin, valueMax, value);
+            var val = Mathf.Lerp(min, max, t);
+            return min <= max ? Mathf.Clamp(val, min, max) : Mathf.Clamp(val, max, min);
+        }
+
+        public static float MapRange(float value, float valueMin, float valueMax, float min, float max, AnimationCurve curve = null)
+        {
+            var t = Mathf.InverseLerp(valueMin, valueMax, value);
             if (curve != null)
             {
                 t = curve.Evaluate(t);
