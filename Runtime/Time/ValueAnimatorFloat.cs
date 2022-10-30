@@ -4,15 +4,15 @@ namespace EssentialUtils
 {
     public class ValueAnimatorFloat : ValueAnimator
     {
-        public float valueStart;
-        public float valueEnd;
+        public float ValueStart { get; set; }
+        public float ValueEnd { get; set; }
 
         public float Value { get; private set; }
 
         protected override void AssignOutputValue()
         {
             var t = GetInterpolationFactor();
-            Value = Mathf.LerpUnclamped(valueStart, valueEnd, t);
+            Value = Mathf.LerpUnclamped(ValueStart, ValueEnd, t);
         }
     }
 }
