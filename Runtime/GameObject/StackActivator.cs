@@ -1,4 +1,4 @@
-using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace EssentialUtils
@@ -20,7 +20,7 @@ namespace EssentialUtils
         public ActivationMethod activationMethod = ActivationMethod.SetActive;
         public ActivationMode activationMode = ActivationMode.Normal;
 
-        public Stack Stack { get; set; } = new();
+        public Stack<GameObject> Stack { get; set; } = new();
 
         public StackActivator(
             ActivationMethod activationMethod = ActivationMethod.SetActive,
@@ -36,7 +36,7 @@ namespace EssentialUtils
             if (activationMode == ActivationMode.Normal && Stack.Count > 0)
             {
                 var topGameObject = Stack.Peek();
-                SetActive((GameObject)topGameObject, false);
+                SetActive(topGameObject, false);
             }
 
             Stack.Push(gameObject);
@@ -48,12 +48,12 @@ namespace EssentialUtils
             if (Stack.Count > 0)
             {
                 var gameObject = Stack.Pop();
-                SetActive((GameObject)gameObject, false);
+                SetActive(gameObject, false);
                 if (Stack.Count > 0)
                 {
-                    SetActive((GameObject)Stack.Peek(), true);
+                    SetActive(Stack.Peek(), true);
                 }
-                return (GameObject)gameObject;
+                return gameObject;
             }
             return null;
         }
@@ -75,7 +75,7 @@ namespace EssentialUtils
             while (Stack.Count > 0)
             {
                 var gameObject = Stack.Pop();
-                SetActive((GameObject)gameObject, false);
+                SetActive(gameObject, false);
             }
         }
     }
