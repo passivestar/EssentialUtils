@@ -112,7 +112,7 @@ namespace EssentialUtils
             {
                 if (paths == null)
                 {
-                    paths = new Dictionary<string, GameObject>();
+                    paths = new();
                     relativePaths.Add(gameObject, paths);
                 }
                 paths.Add(gameObjectName, result);

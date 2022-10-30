@@ -36,15 +36,15 @@ namespace EssentialUtils
             var z = Mathf.Abs(direction.z);
             if (x > y && x > z)
             {
-                return new Vector3(Mathf.Sign(direction.x), 0, 0);
+                return new(Mathf.Sign(direction.x), 0, 0);
             }
             else if (y > x && y > z)
             {
-                return new Vector3(0, Mathf.Sign(direction.y), 0);
+                return new(0, Mathf.Sign(direction.y), 0);
             }
             else
             {
-                return new Vector3(0, 0, Mathf.Sign(direction.z));
+                return new(0, 0, Mathf.Sign(direction.z));
             }
         }
 
