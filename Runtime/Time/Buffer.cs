@@ -15,7 +15,7 @@ namespace EssentialUtils
         public bool UnscaledTime { get; set; }
         public int Count => Queue.Count;
 
-        public Action OnFull { get; set; }
+        public event Action OnFull;
 
         Queue Queue { get; } = new();
         Queue<float> QueueTimeSamples { get; } = new();

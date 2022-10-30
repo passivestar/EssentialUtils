@@ -11,10 +11,10 @@ namespace EssentialUtils
         public Action ActionDisable { get; private set; }
         public Action ActionToggle { get; private set; }
 
-        public Action OnEnabled { get; set; }
-        public Action OnDisabled { get; set; }
-        public Action OnBecameEnabled { get; set; }
-        public Action OnBecameDisabled { get; set; }
+        public event Action OnEnabled;
+        public event Action OnDisabled;
+        public event Action OnBecameEnabled;
+        public event Action OnBecameDisabled;
 
         public ToggleFlow(Action onEnabled = null, Action onDisabled = null,
             Action onBecameEnabled = null, Action onBecameDisabled = null,

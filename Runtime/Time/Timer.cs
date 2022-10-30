@@ -15,12 +15,12 @@ namespace EssentialUtils
         public bool Loop { get; set; }
         public bool UnscaledTime { get; set; }
 
-        public Action OnStarted { get; set; }
-        public Action OnStopped { get; set; }
-        public Action OnPaused { get; set; }
-        public Action OnResumed { get; set; }
-        public Action OnFinished { get; set; }
-        public Action OnUpdate { get; set; }
+        public event Action OnStarted;
+        public event Action OnStopped;
+        public event Action OnPaused;
+        public event Action OnResumed;
+        public event Action OnFinished;
+        public event Action OnUpdate;
 
         public float Elapsed { get; private set; }
         public float ElapsedRatio { get; private set; }

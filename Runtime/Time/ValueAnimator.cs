@@ -5,6 +5,14 @@ namespace EssentialUtils
 {
     public abstract class ValueAnimator : IDisposable
     {
+        public Action ActionPlay { get; private set; }
+        public Action ActionPlayFromStart { get; private set; }
+        public Action ActionReverse{ get; private set; }
+        public Action ActionReverseFromEnd { get; private set; }
+        public Action ActionStop { get; private set; }
+        public Action ActionToggleDirection { get; private set; }
+        public Action ActionTogglePlayState { get; private set; }
+
         public float Elapsed { get; private set; }
         public float ElapsedRatio { get; private set; }
         public bool Active { get; private set; }
@@ -30,11 +38,11 @@ namespace EssentialUtils
         AnimationCurve curve;
         AnimationCurve reverseCurve;
 
-        Action onStarted;
-        Action onStartedInReverse;
-        Action onFinished;
-        Action onFinishedInReverse;
-        Action onUpdate;
+        public Action OnStarted;
+        public Action OnStartedInReverse;
+        public Action OnFinished;
+        public Action OnFinishedInReverse;
+        public Action OnUpdate;
 
         AnimationCurve currentCurve;
 
@@ -43,6 +51,20 @@ namespace EssentialUtils
             Action onStarted = null, Action onStartedInReverse = null, Action onFinished = null,
             Action onFinishedInReverse = null, Action onUpdate = null)
         {
+            OnStarted = onStarted;
+            OnStartedInReverse = onStartedInReverse;
+            OnFinished = onFinished;
+            OnFinishedInReverse = onFinishedInReverse;
+            OnUpdate = onUpdate;
+
+            ActionPlay = () => Play();
+            ActionPlayFromStart = () => PlayFromStart();
+            ActionReverse = () => Reverse();
+            ActionReverseFromEnd = () => ReverseFromEnd();
+            ActionStop = () => Stop();
+            ActionToggleDirection = () => ToggleDirection();
+            ActionTogglePlayState = () => TogglePlayState();
+
             MonoBehaviourHelper.Instance.onUpdate += Update;
         }
 
@@ -82,7 +104,7 @@ namespace EssentialUtils
 
             ElapsedRatio = Mathf.Clamp01(Elapsed / duration);
 
-            onUpdate?.Invoke();
+            OnUpdate?.Invoke();
 
             if (PlayingInReverse && Elapsed <= 0 || !PlayingInReverse && Elapsed >= duration)
             {
@@ -97,11 +119,11 @@ namespace EssentialUtils
 
                 if (PlayingInReverse)
                 {
-                    onFinishedInReverse?.Invoke();
+                    OnFinishedInReverse?.Invoke();
                 }
                 else
                 {
-                    onFinished?.Invoke();
+                    OnFinished?.Invoke();
                 }
             }
         }
@@ -132,14 +154,14 @@ namespace EssentialUtils
             {
                 StartPlaying(false);
             }
-            onStarted?.Invoke();
+            OnStarted?.Invoke();
         }
 
         public void PlayFromStart()
         {
             Elapsed = 0;
             Play();
-            onStarted?.Invoke();
+            OnStarted?.Invoke();
         }
 
         public void Reverse()
@@ -152,14 +174,14 @@ namespace EssentialUtils
             {
                 StartPlaying(true);
             }
-            onStartedInReverse?.Invoke();
+            OnStartedInReverse?.Invoke();
         }
 
         public void ReverseFromEnd()
         {
             Elapsed = duration;
             Reverse();
-            onStartedInReverse?.Invoke();
+            OnStartedInReverse?.Invoke();
         }
 
         public void Stop()
@@ -188,8 +210,9 @@ namespace EssentialUtils
             }
         }
 
-        public void SetTime()
+        public void SetTime(float time)
         {
+            Elapsed = time;
             AssignOutputValue();
             Update(true);
         }

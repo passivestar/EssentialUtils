@@ -9,10 +9,10 @@ namespace EssentialUtils
 
         public bool LastValue { get; private set; }
 
-        public Action OnChanged { get; set; }
-        public Action OnUnchanged { get; set; }
-        public Action OnBecameTrue { get; set; }
-        public Action OnBecameFalse { get; set; }
+        public event Action OnChanged;
+        public event Action OnUnchanged;
+        public event Action OnBecameTrue;
+        public event Action OnBecameFalse;
 
         bool? previousValue = null;
 

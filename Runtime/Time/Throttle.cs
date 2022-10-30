@@ -9,7 +9,7 @@ namespace EssentialUtils
 
         public float Interval { get; set; }
 
-        public Action OnRun { get; set; }
+        public event Action OnRun;
 
         float elapsed;
         float lastInvokeTime;

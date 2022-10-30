@@ -9,7 +9,7 @@ namespace EssentialUtils
 
         public bool WasCalled { get; private set; }
 
-        public Action OnRun { get; set; }
+        public event Action OnRun;
 
         public Once(Action onRun)
         {

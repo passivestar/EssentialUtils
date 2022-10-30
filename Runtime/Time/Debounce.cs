@@ -9,7 +9,7 @@ namespace EssentialUtils
 
         public float Interval { get; set; }
         public bool UnscaledTime { get; set; }
-        public Action OnRun { get; set; }
+        public event Action OnRun;
 
         float elapsed;
         float lastRunTime;
@@ -17,9 +17,9 @@ namespace EssentialUtils
 
         public Debounce(Action onRun, float interval = 1f, bool unscaledTime = false)
         {
-            OnRun = onRun;
             Interval = interval;
             UnscaledTime = unscaledTime;
+            OnRun = onRun;
 
             ActionRun = () => Run();
 

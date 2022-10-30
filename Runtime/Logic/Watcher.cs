@@ -8,8 +8,8 @@ namespace EssentialUtils
 
         public object LastValue { get; private set; }
 
-        public Action OnChanged { get; set; }
-        public Action OnUnchanged { get; set; }
+        public event Action OnChanged;
+        public event Action OnUnchanged;
 
         object previousValue = null;
 

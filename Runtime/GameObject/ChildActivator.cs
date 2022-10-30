@@ -25,7 +25,7 @@ namespace EssentialUtils
         public int InitialIndex { get; private set; }
         public int CurrentIndex { get; private set; }
         public GameObject GameObject { get; private set; }
-        public Action OnCycle { get; set; }
+        public event Action OnCycle;
 
         public ChildActivator(GameObject gameObject, int initialIndex = 0,
             bool loop = true, Action onCycle = null,
