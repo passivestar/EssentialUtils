@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace EssentialUtils
@@ -17,7 +18,7 @@ namespace EssentialUtils
         public Action OnFull { get; set; }
 
         Queue Queue { get; } = new();
-        Queue QueueTimeSamples { get; } = new();
+        Queue<float> QueueTimeSamples { get; } = new();
         float elapsed;
         float lastTime;
 
@@ -47,7 +48,7 @@ namespace EssentialUtils
             if (MaxTime > 0)
             {
                 // Remove outdated samples from the queue
-                while (QueueTimeSamples.Count > 0 && elapsed - (float)QueueTimeSamples.Peek() > MaxTime)
+                while (QueueTimeSamples.Count > 0 && elapsed - QueueTimeSamples.Peek() > MaxTime)
                 {
                     Queue.Dequeue();
                     QueueTimeSamples.Dequeue();
