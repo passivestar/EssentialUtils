@@ -5,12 +5,6 @@ namespace EssentialUtils
 {
     public class StackActivator
     {
-        public enum ActivationMethod
-        {
-            SetActive,
-            SendMessage
-        }
-
         public enum ActivationMode
         {
             Normal,
@@ -36,11 +30,11 @@ namespace EssentialUtils
             if (activationMode == ActivationMode.Normal && Stack.Count > 0)
             {
                 var topGameObject = Stack.Peek();
-                SetActive(topGameObject, false);
+                topGameObject.SetActive(false, activationMethod);
             }
 
             Stack.Push(gameObject);
-            SetActive(gameObject, true);
+            gameObject.SetActive(true, activationMethod);
         }
 
         public GameObject Pop()
@@ -48,26 +42,14 @@ namespace EssentialUtils
             if (Stack.Count > 0)
             {
                 var gameObject = Stack.Pop();
-                SetActive(gameObject, false);
+                gameObject.SetActive(false, activationMethod);
                 if (Stack.Count > 0)
                 {
-                    SetActive(Stack.Peek(), true);
+                    Stack.Peek().SetActive(true, activationMethod);
                 }
                 return gameObject;
             }
             return null;
-        }
-
-        void SetActive(GameObject gameObject, bool active)
-        {
-            if (activationMethod == ActivationMethod.SetActive)
-            {
-                gameObject.SetActive(active);
-            }
-            else
-            {
-                gameObject.SendMessage(active ? "Activate" : "Deactivate", SendMessageOptions.DontRequireReceiver);
-            }
         }
 
         public void Clear()
@@ -75,7 +57,7 @@ namespace EssentialUtils
             while (Stack.Count > 0)
             {
                 var gameObject = Stack.Pop();
-                SetActive(gameObject, false);
+                gameObject.SetActive(false, activationMethod);
             }
         }
     }

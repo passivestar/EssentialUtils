@@ -5,12 +5,6 @@ namespace EssentialUtils
 {
     public class ChildActivator
     {
-        public enum ActivationMethod
-        {
-            SetActive,
-            SendMessage
-        }
-
         public enum ActivationMode
         {
             Normal,
@@ -19,6 +13,9 @@ namespace EssentialUtils
 
         public ActivationMethod activationMethod = ActivationMethod.SetActive;
         public ActivationMode activationMode = ActivationMode.Normal;
+
+        public Action ActionNext { get; private set; }
+        public Action ActionPrevious { get; private set; }
 
         public bool Loop { get; set; }
 
@@ -42,7 +39,10 @@ namespace EssentialUtils
             // Initialize:
             CurrentIndex = InitialIndex;
             Clear();
-            SetActive(GetCurrentObject(), true);
+            GetCurrentObject().SetActive(true, activationMethod);
+
+            ActionNext = () => Next();
+            ActionPrevious = () => Previous();
         }
 
         public void Next() => Process(false);
@@ -52,7 +52,7 @@ namespace EssentialUtils
         {
             if (activationMode == ActivationMode.Normal)
             {
-                SetActive(GetCurrentObject(), false);
+                GetCurrentObject().SetActive(false, activationMethod);
             }
 
             if (previous)
@@ -70,11 +70,14 @@ namespace EssentialUtils
 
             if (Loop && CurrentIndex == 0)
             {
-                Clear();
+                if (activationMode == ActivationMode.Additive)
+                {
+                    Clear();
+                }
                 OnCycle?.Invoke();
             }
 
-            SetActive(GetCurrentObject(), true);
+            GetCurrentObject().SetActive(true, activationMethod);
         }
 
         GameObject GetCurrentObject()
@@ -82,30 +85,11 @@ namespace EssentialUtils
             return GameObject.transform.GetChild(CurrentIndex).gameObject;
         }
 
-        void SetActive(GameObject gameObject, bool active)
-        {
-            if (activationMethod == ActivationMethod.SetActive)
-            {
-                gameObject.SetActive(active);
-            }
-            else
-            {
-                gameObject.SendMessage(active ? "Activate" : "Deactivate", SendMessageOptions.DontRequireReceiver);
-            }
-        }
-
         void Clear()
         {
             foreach (Transform child in GameObject.transform)
             {
-                if (activationMethod == ActivationMethod.SetActive)
-                {
-                    child.gameObject.SetActive(false);
-                }
-                else
-                {
-                    child.gameObject.SendMessage("Deactivate", SendMessageOptions.DontRequireReceiver);
-                }
+                child.gameObject.SetActive(false, activationMethod);
             }
         }
     }

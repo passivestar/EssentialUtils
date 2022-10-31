@@ -6,19 +6,13 @@ namespace EssentialUtils
 {
     public class SceneLoader : MonoBehaviour
     {
-        public enum LoadingScreenActivationMethod
-        {
-            SetActive,
-            SendMessage
-        }
-
         public enum LoadingMode
         {
             ByIndex,
             ByName
         }
 
-        public static LoadingScreenActivationMethod loadingScreenActivationMethod = LoadingScreenActivationMethod.SetActive;
+        public static ActivationMethod loadingScreenActivationMethod = ActivationMethod.SetActive;
 
         public static GameObject LoadingScreen { get; private set; }
         public static bool IsLoading { get; private set; }
@@ -72,7 +66,7 @@ namespace EssentialUtils
             if (LoadingScreen != null)
             {
                 loadingScreenCamera = LoadingScreen.transform.Find("Camera")?.gameObject;
-                SetActive(LoadingScreen, true);
+                LoadingScreen.SetActive(true, loadingScreenActivationMethod);
             }
 
             yield return new WaitForSeconds(DelayBeforeLoading);
@@ -120,7 +114,7 @@ namespace EssentialUtils
             Resources.UnloadUnusedAssets();
             if (LoadingScreen != null)
             {
-                SetActive(LoadingScreen, false);
+                LoadingScreen.SetActive(false, loadingScreenActivationMethod);
             }
 
             if (loadingScreenCamera != null)
@@ -133,19 +127,6 @@ namespace EssentialUtils
                 : SceneManager.GetSceneByBuildIndex(sceneIndex);
             SceneManager.SetActiveScene(scene);
             IsLoading = false;
-        }
-
-        static void SetActive(GameObject gameObject, bool active)
-        {
-            if (loadingScreenActivationMethod == LoadingScreenActivationMethod.SetActive)
-            {
-                gameObject.SetActive(active);
-            }
-            else
-            {
-                if (active) gameObject.SetActive(true);
-                gameObject.SendMessage(active ? "Activate" : "Deactivate", SendMessageOptions.DontRequireReceiver);
-            }
         }
 
         public static void SetLoadingScreen(GameObject loadingScreen)
