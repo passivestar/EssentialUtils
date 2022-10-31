@@ -7,11 +7,17 @@ namespace EssentialUtils
     {
         public Action ActionPlay { get; private set; }
         public Action ActionPlayFromStart { get; private set; }
-        public Action ActionReverse{ get; private set; }
+        public Action ActionReverse { get; private set; }
         public Action ActionReverseFromEnd { get; private set; }
         public Action ActionStop { get; private set; }
         public Action ActionToggleDirection { get; private set; }
         public Action ActionTogglePlayState { get; private set; }
+
+        public float Duration { get; set; }
+        public bool Loop { get; set; }
+        public bool UnscaledTime { get; set; }
+        public AnimationCurve Curve { get; set; }
+        public AnimationCurve ReverseCurve { get; set; }
 
         public float Elapsed { get; private set; }
         public float ElapsedRatio { get; private set; }
@@ -21,28 +27,22 @@ namespace EssentialUtils
         float remaining;
         public float Remaining
         {
-            get => Mathf.Max(0, duration - Elapsed);
+            get => Mathf.Max(0, Duration - Elapsed);
             private set => remaining = value;
         }
 
         float remainingRatio;
         public float RemainingRatio
         {
-            get => Mathf.Clamp01((duration - Elapsed) / duration);
+            get => Mathf.Clamp01((Duration - Elapsed) / Duration);
             private set => remainingRatio = value;
         }
 
-        float duration;
-        bool loop;
-        bool unscaledTime;
-        AnimationCurve curve;
-        AnimationCurve reverseCurve;
-
-        public Action OnStarted;
-        public Action OnStartedInReverse;
-        public Action OnFinished;
-        public Action OnFinishedInReverse;
-        public Action OnUpdate;
+        public event Action OnStarted;
+        public event Action OnStartedInReverse;
+        public event Action OnFinished;
+        public event Action OnFinishedInReverse;
+        public event Action OnUpdate;
 
         AnimationCurve currentCurve;
 
@@ -51,6 +51,12 @@ namespace EssentialUtils
             Action onStarted = null, Action onStartedInReverse = null, Action onFinished = null,
             Action onFinishedInReverse = null, Action onUpdate = null)
         {
+            Duration = duration;
+            Loop = loop;
+            UnscaledTime = unscaledTime;
+            Curve = curve;
+            ReverseCurve = reverseCurve;
+
             OnStarted = onStarted;
             OnStartedInReverse = onStartedInReverse;
             OnFinished = onFinished;
@@ -75,7 +81,7 @@ namespace EssentialUtils
 
         internal float GetInterpolationFactor()
         {
-            return curve != null ? curve.Evaluate(ElapsedRatio) : ElapsedRatio;
+            return currentCurve != null ? currentCurve.Evaluate(ElapsedRatio) : ElapsedRatio;
         }
 
         protected virtual void AssignOutputValue() { }
@@ -89,7 +95,7 @@ namespace EssentialUtils
                 return;
             }
 
-            var delta = unscaledTime ? Time.unscaledDeltaTime : Time.deltaTime;
+            var delta = UnscaledTime ? Time.unscaledDeltaTime : Time.deltaTime;
 
             if (PlayingInReverse)
             {
@@ -99,18 +105,19 @@ namespace EssentialUtils
             else
             {
                 Elapsed += delta;
-                Elapsed = Mathf.Min(Elapsed, duration);
+                Elapsed = Mathf.Min(Elapsed, Duration);
             }
 
-            ElapsedRatio = Mathf.Clamp01(Elapsed / duration);
+            ElapsedRatio = Mathf.Clamp01(Elapsed / Duration);
 
+            AssignOutputValue();
             OnUpdate?.Invoke();
 
-            if (PlayingInReverse && Elapsed <= 0 || !PlayingInReverse && Elapsed >= duration)
+            if (PlayingInReverse && Elapsed <= 0 || !PlayingInReverse && Elapsed >= Duration)
             {
-                if (loop)
+                if (Loop)
                 {
-                    Elapsed = PlayingInReverse ? duration : 0;
+                    Elapsed = PlayingInReverse ? Duration : 0;
                 }
                 else
                 {
@@ -130,13 +137,13 @@ namespace EssentialUtils
 
         void StartPlaying(bool inReverse)
         {
-            if (reverseCurve != null && inReverse)
+            if (ReverseCurve != null && inReverse)
             {
-                currentCurve = reverseCurve;
+                currentCurve = ReverseCurve;
             }
-            else if (curve != null && !inReverse)
+            else if (Curve != null && !inReverse)
             {
-                currentCurve = curve;
+                currentCurve = Curve;
             }
 
             PlayingInReverse = inReverse;
@@ -179,7 +186,7 @@ namespace EssentialUtils
 
         public void ReverseFromEnd()
         {
-            Elapsed = duration;
+            Elapsed = Duration;
             Reverse();
             OnStartedInReverse?.Invoke();
         }
