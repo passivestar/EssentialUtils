@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace EssentialUtils
 {
-    public class StackActivator
+    public class ActivatorStack
     {
         public enum ActivationMode
         {
@@ -16,7 +16,7 @@ namespace EssentialUtils
 
         public Stack<GameObject> Stack { get; set; } = new();
 
-        public StackActivator(
+        public ActivatorStack(
             ActivationMethod activationMethod = ActivationMethod.SetActive,
             ActivationMode activationMode = ActivationMode.Normal
         )

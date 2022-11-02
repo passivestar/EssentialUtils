@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace EssentialUtils
 {
-    public class ChildActivator
+    public class ActivatorSequential
     {
         public enum ActivationMode
         {
@@ -24,7 +24,7 @@ namespace EssentialUtils
         public GameObject GameObject { get; private set; }
         public event Action OnCycle;
 
-        public ChildActivator(GameObject gameObject, int initialIndex = 0,
+        public ActivatorSequential(GameObject gameObject, int initialIndex = 0,
             bool loop = true, Action onCycle = null,
             ActivationMethod activationMethod = ActivationMethod.SetActive,
             ActivationMode activationMode = ActivationMode.Normal)
