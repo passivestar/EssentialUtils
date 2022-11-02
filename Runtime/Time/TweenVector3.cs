@@ -3,14 +3,14 @@ using UnityEngine;
 
 namespace EssentialUtils
 {
-    public class ValueAnimatorVector2 : ValueAnimator
+    public class TweenVector3 : Tween
     {
-        public Vector2 ValueStart { get; set; }
-        public Vector2 ValueEnd { get; set; }
+        public Vector3 ValueStart { get; set; }
+        public Vector3 ValueEnd { get; set; }
 
-        public Vector2 Value { get; private set; }
+        public Vector3 Value { get; private set; }
 
-        public ValueAnimatorVector2(float duration = 1f, bool loop = false, bool unscaledTime = false,
+        public TweenVector3(float duration = 1f, bool loop = false, bool unscaledTime = false,
             AnimationCurve curve = null, AnimationCurve reverseCurve = null,
             Action onStarted = null, Action onStartedInReverse = null, Action onFinished = null,
             Action onFinishedInReverse = null, Action onUpdate = null) : base(
@@ -22,7 +22,7 @@ namespace EssentialUtils
         protected override void AssignOutputValue()
         {
             var t = GetInterpolationFactor();
-            Value = Vector2.LerpUnclamped(ValueStart, ValueStart, t);
+            Value = Vector3.LerpUnclamped(ValueStart, ValueEnd, t);
         }
     }
 }

@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace EssentialUtils
 {
-    public abstract class ValueAnimator : IDisposable
+    public abstract class Tween : IDisposable
     {
         public Action ActionPlay { get; private set; }
         public Action ActionPlayFromStart { get; private set; }
@@ -46,7 +46,7 @@ namespace EssentialUtils
 
         AnimationCurve currentCurve;
 
-        public ValueAnimator(float duration = 1f, bool loop = false, bool unscaledTime = false,
+        public Tween(float duration = 1f, bool loop = false, bool unscaledTime = false,
             AnimationCurve curve = null, AnimationCurve reverseCurve = null,
             Action onStarted = null, Action onStartedInReverse = null, Action onFinished = null,
             Action onFinishedInReverse = null, Action onUpdate = null)
