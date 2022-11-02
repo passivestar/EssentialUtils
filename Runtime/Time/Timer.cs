@@ -5,11 +5,6 @@ namespace EssentialUtils
 {
     public class Timer
     {
-        public Action ActionStart { get; private set; }
-        public Action ActionStop { get; private set; }
-        public Action ActionPause { get; private set; }
-        public Action ActionResume { get; private set; }
-
         public float Duration { get; set; }
         public bool Loop { get; set; }
         public bool UnscaledTime { get; set; }
@@ -52,11 +47,6 @@ namespace EssentialUtils
             OnResumed = onResumed;
             OnFinished = onFinished;
             OnUpdate = onUpdate;
-
-            ActionStart = () => Start();
-            ActionStop = () => Stop();
-            ActionPause = () => Pause();
-            ActionResume = () => Resume();
 
             MonoBehaviourHelper.Instance.onUpdate += Update;
         }

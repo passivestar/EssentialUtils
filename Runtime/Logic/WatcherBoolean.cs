@@ -4,8 +4,6 @@ namespace EssentialUtils
 {
     public class WatcherBoolean
     {
-        public Action ActionRun { get; private set; }
-
         public bool LastValue { get; private set; }
 
         public event Action OnChanged;

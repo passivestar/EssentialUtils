@@ -14,9 +14,6 @@ namespace EssentialUtils
         public ActivationMethod activationMethod = ActivationMethod.SetActive;
         public ActivationMode activationMode = ActivationMode.Normal;
 
-        public Action ActionNext { get; private set; }
-        public Action ActionPrevious { get; private set; }
-
         public bool Loop { get; set; }
 
         public int InitialIndex { get; private set; }
@@ -40,9 +37,6 @@ namespace EssentialUtils
             CurrentIndex = InitialIndex;
             Clear();
             GetCurrentObject().SetActive(true, activationMethod);
-
-            ActionNext = () => Next();
-            ActionPrevious = () => Previous();
         }
 
         public void Next() => Process(false);

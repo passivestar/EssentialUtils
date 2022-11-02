@@ -5,14 +5,7 @@ namespace EssentialUtils
 {
     public class Oscillator
     {
-        public Action ActionRun { get; private set; }
-
         float elapsed;
-
-        public Oscillator()
-        {
-            ActionRun = () => Run();
-        }
 
         // TODO: Subscribe to update, no need to call manually
 

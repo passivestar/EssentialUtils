@@ -4,8 +4,6 @@ namespace EssentialUtils
 {
     public class Watcher
     {
-        public Action ActionRun { get; private set; }
-
         public object LastValue { get; private set; }
 
         public event Action OnChanged;

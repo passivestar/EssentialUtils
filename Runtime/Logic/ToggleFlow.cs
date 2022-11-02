@@ -6,11 +6,6 @@ namespace EssentialUtils
     {
         public bool IsEnabled { get; private set; }
 
-        public Action ActionRun { get; private set; }
-        public Action ActionEnable { get; private set; }
-        public Action ActionDisable { get; private set; }
-        public Action ActionToggle { get; private set; }
-
         public event Action OnEnabled;
         public event Action OnDisabled;
         public event Action OnBecameEnabled;
@@ -24,11 +19,6 @@ namespace EssentialUtils
             OnDisabled = onDisabled;
             OnBecameEnabled = onBecameEnabled;
             OnBecameDisabled = onBecameDisabled;
-
-            ActionRun = () => Run();
-            ActionEnable = () => Enable();
-            ActionDisable = () => Disable();
-            ActionToggle = () => Toggle();
         }
 
         public void Run()

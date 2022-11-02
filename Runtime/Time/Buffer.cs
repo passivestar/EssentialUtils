@@ -7,9 +7,6 @@ namespace EssentialUtils
 {
     public class Buffer : IDisposable
     {
-        public Action ActionRun { get; private set; }
-        public Action ActionReset { get; private set; }
-
         public int MaxCount { get; set; }
         public float MaxTime { get; set; }
         public bool UnscaledTime { get; set; }
@@ -28,9 +25,6 @@ namespace EssentialUtils
             MaxTime = maxTime;
             UnscaledTime = unscaledTime;
             OnFull = onFull;
-
-            ActionRun = () => Run();
-            ActionReset = () => Reset();
 
             MonoBehaviourHelper.Instance.onUpdate += Update;
         }

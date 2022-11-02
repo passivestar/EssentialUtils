@@ -5,14 +5,6 @@ namespace EssentialUtils
 {
     public abstract class Tween : IDisposable
     {
-        public Action ActionPlay { get; private set; }
-        public Action ActionPlayFromStart { get; private set; }
-        public Action ActionReverse { get; private set; }
-        public Action ActionReverseFromEnd { get; private set; }
-        public Action ActionStop { get; private set; }
-        public Action ActionToggleDirection { get; private set; }
-        public Action ActionTogglePlayState { get; private set; }
-
         public float Duration { get; set; }
         public bool Loop { get; set; }
         public bool UnscaledTime { get; set; }
@@ -62,14 +54,6 @@ namespace EssentialUtils
             OnFinished = onFinished;
             OnFinishedInReverse = onFinishedInReverse;
             OnUpdate = onUpdate;
-
-            ActionPlay = () => Play();
-            ActionPlayFromStart = () => PlayFromStart();
-            ActionReverse = () => Reverse();
-            ActionReverseFromEnd = () => ReverseFromEnd();
-            ActionStop = () => Stop();
-            ActionToggleDirection = () => ToggleDirection();
-            ActionTogglePlayState = () => TogglePlayState();
 
             MonoBehaviourHelper.Instance.onUpdate += Update;
         }

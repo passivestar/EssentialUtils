@@ -5,8 +5,6 @@ namespace EssentialUtils
 {
     public class Debounce : IDisposable
     {
-        public Action ActionRun { get; private set; }
-
         public float Interval { get; set; }
         public bool UnscaledTime { get; set; }
         public event Action OnRun;
@@ -20,8 +18,6 @@ namespace EssentialUtils
             Interval = interval;
             UnscaledTime = unscaledTime;
             OnRun = onRun;
-
-            ActionRun = () => Run();
 
             MonoBehaviourHelper.Instance.onUpdate += Update;
         }

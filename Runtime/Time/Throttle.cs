@@ -5,8 +5,6 @@ namespace EssentialUtils
 {
     public class Throttle
     {
-        public Action ActionRun { get; private set; }
-
         public float Interval { get; set; }
 
         public event Action OnRun;
@@ -18,7 +16,6 @@ namespace EssentialUtils
         {
             OnRun = onRun;
             Interval = interval;
-            ActionRun = () => Run();
         }
 
         public void Run(bool unscaledTime = false)
