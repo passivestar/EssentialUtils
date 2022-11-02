@@ -109,5 +109,13 @@ namespace EssentialUtils
             localScale.x = localScale.y = localScale.z = value;
             transform.localScale = localScale;
         }
+
+        public static void Clear(this Transform transform)
+        {
+            foreach (Transform child in transform)
+            {
+                Object.Destroy(child.gameObject);
+            }
+        }
     }
 }

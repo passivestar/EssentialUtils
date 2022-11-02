@@ -1,6 +1,6 @@
 {
     "name": "com.passivestar.essentialutils",
-    "version": "0.1.8",
+    "version": "0.1.9",
     "displayName": "Essential Utils",
     "description": "A library of useful utility classes for all sorts of Unity things",
     "license": "See LICENSE.md",
