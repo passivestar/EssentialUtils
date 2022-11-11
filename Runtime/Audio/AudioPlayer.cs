@@ -116,20 +116,20 @@ namespace EssentialUtils
             }
         }
 
-        public void PlayOneShot(AudioClip clip, float volume, float pitchMin = .9f, float pitchMax = 1.1f)
+        public void PlayOneShot(AudioClip clip, float volume = 1f, float pitchMin = .9f, float pitchMax = 1.1f)
         {
             sourceA.volume = volume;
             sourceA.pitch = UnityEngine.Random.Range(pitchMin, pitchMax);
             sourceA.PlayOneShot(clip);
         }
 
-        public static void PlayGlobal(AudioClip clip, float volume, float pitchMin = .9f, float pitchMax = 1.1f,
+        public static void PlayGlobal(AudioClip clip, float volume = 1f, float pitchMin = .9f, float pitchMax = 1.1f,
             float crossfadeTime = 3f, bool loop = false)
         {
             Instance.Play(clip, volume, pitchMin, pitchMax, crossfadeTime, loop);
         }
 
-        public static void PlayAtPointGlobal(AudioClip clip, float volume, float pitchMin = .9f, float pitchMax = 1.1f,
+        public static void PlayAtPointGlobal(AudioClip clip, float volume = 1f, float pitchMin = .9f, float pitchMax = 1.1f,
             float distanceMin = 1f, float distanceMax = 10f, Vector3 point = new Vector3())
         {
             var gameObject = new GameObject();
@@ -145,7 +145,7 @@ namespace EssentialUtils
             Destroy(gameObject, clip.length / pitch);
         }
 
-        public static void PlayOneShotGlobal(AudioClip clip, float volume, float pitchMin = .9f, float pitchMax = 1.1f)
+        public static void PlayOneShotGlobal(AudioClip clip, float volume = 1f, float pitchMin = .9f, float pitchMax = 1.1f)
         {
             Instance.PlayOneShot(clip, volume, pitchMin, pitchMax);
         }
