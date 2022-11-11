@@ -14,7 +14,7 @@ namespace EssentialUtils
         public float Elapsed { get; private set; }
         public float ElapsedRatio { get; private set; }
         public bool Active { get; private set; }
-        public bool PlayingInReverse { get; private set; }
+        public bool PlayingInReverse { get; private set; } = true;
 
         float remaining;
         public float Remaining
@@ -178,6 +178,12 @@ namespace EssentialUtils
         public void Stop()
         {
             Active = false;
+        }
+
+        public void Toggle()
+        {
+            ToggleDirection();
+            TogglePlayState();
         }
 
         public void ToggleDirection()
