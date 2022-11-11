@@ -4,7 +4,7 @@ using UnityEngine.SceneManagement;
 
 namespace EssentialUtils
 {
-    public class SceneLoader : MonoBehaviour
+    public class SceneLoader : Singleton<SceneLoader>
     {
         public enum LoadingMode
         {
@@ -24,27 +24,10 @@ namespace EssentialUtils
 
         public static bool UnloadActiveSceneBeforeLoading { get; set; } = true;
 
-        static SceneLoader instance = null;
         static GameObject loadingScreenCamera = null;
 
         static string sceneName;
         static int sceneIndex;
-
-        public static SceneLoader Instance
-        {
-            get
-            {
-                if (instance != null)
-                {
-                    return instance;
-                }
-                var gameObject = new GameObject();
-                gameObject.name = "EssentialUtils_SceneLoader";
-                instance = gameObject.AddComponent<SceneLoader>();
-                DontDestroyOnLoad(gameObject);
-                return instance;
-            }
-        }
 
         public static void Load(string name)
         {

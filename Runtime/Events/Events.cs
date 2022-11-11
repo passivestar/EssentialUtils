@@ -4,31 +4,14 @@ using UnityEngine;
 
 namespace EssentialUtils
 {
-    public class Events : MonoBehaviour
+    public class Events : Singleton<Events>
     {
-        static Events instance = null;
-
-        public static Events Instance
-        {
-            get
-            {
-                if (instance != null)
-                {
-                    return instance;
-                }
-                var gameObject = new GameObject();
-                gameObject.name = "EssentialUtils_Events";
-                instance = gameObject.AddComponent<Events>();
-                DontDestroyOnLoad(gameObject);
-                return instance;
-            }
-        }
-
         Dictionary<string, List<Action>> actionsByEventName = new();
         Dictionary<MonoBehaviour, List<Action>> actionsByMonoBehaviour = new();
 
-        void Awake()
+        protected override void Awake()
         {
+            base.Awake();
             foreach (var mb in FindObjectsOfType<MonoBehaviour>(true))
             {
                 RegisterMonoBehaviour(mb);

@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace EssentialUtils
 {
-    public class AudioPlayer : MonoBehaviour
+    public class AudioPlayer : MonoBehaviourWithGlobalInstance<AudioPlayer>
     {
         public bool UnscaledTime { get; set; }
 
@@ -15,24 +15,6 @@ namespace EssentialUtils
         AudioSource sourceB;
         float sourceAVolume = 1f;
         float sourceBVolume = 1f;
-
-        static AudioPlayer instance = null;
-
-        public static AudioPlayer Instance
-        {
-            get
-            {
-                if (instance != null)
-                {
-                    return instance;
-                }
-                var gameObject = new GameObject();
-                gameObject.name = "EssentialUtils_AudioPlayer";
-                instance = gameObject.AddComponent<AudioPlayer>();
-                DontDestroyOnLoad(gameObject);
-                return instance;
-            }
-        }
 
         void Awake()
         {

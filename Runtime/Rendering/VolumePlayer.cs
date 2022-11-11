@@ -4,7 +4,7 @@ using UnityEngine.Rendering;
 
 namespace EssentialUtils
 {
-    public class VolumePlayer : MonoBehaviour
+    public class VolumePlayer : MonoBehaviourWithGlobalInstance<VolumePlayer>
     {
         public bool UnscaledTime { get; set; }
 
@@ -17,24 +17,6 @@ namespace EssentialUtils
         Volume volumeB;
         float volumeAWeight = 1f;
         float volumeBWeight = 1f;
-
-        static VolumePlayer instance = null;
-
-        public static VolumePlayer Instance
-        {
-            get
-            {
-                if (instance != null)
-                {
-                    return instance;
-                }
-                var gameObject = new GameObject();
-                gameObject.name = "EssentialUtils_VolumePlayer";
-                instance = gameObject.AddComponent<VolumePlayer>();
-                DontDestroyOnLoad(gameObject);
-                return instance;
-            }
-        }
 
         void Awake()
         {
