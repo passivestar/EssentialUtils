@@ -52,7 +52,7 @@ namespace EssentialUtils
             if (previous)
             {
                 CurrentIndex = Loop
-                    ? Math.Mod((int)CurrentIndex - 1, GameObject.transform.childCount)
+                    ? ((int)CurrentIndex - 1).Mod(GameObject.transform.childCount)
                     : CurrentIndex--;
             }
             else

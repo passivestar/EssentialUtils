@@ -23,5 +23,24 @@ namespace EssentialUtils
         {
             Debug.DrawRay(vector, dir, color, duration);
         }
+
+        public static Vector3 SnapToNearestAxis(this Vector3 direction)
+        {
+            var x = Mathf.Abs(direction.x);
+            var y = Mathf.Abs(direction.y);
+            var z = Mathf.Abs(direction.z);
+            if (x > y && x > z)
+            {
+                return new(Mathf.Sign(direction.x), 0, 0);
+            }
+            else if (y > x && y > z)
+            {
+                return new(0, Mathf.Sign(direction.y), 0);
+            }
+            else
+            {
+                return new(0, 0, Mathf.Sign(direction.z));
+            }
+        }
     }
 }

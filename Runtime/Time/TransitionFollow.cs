@@ -36,7 +36,7 @@ namespace EssentialUtils
             if (accelerationMultiplier != null) AccelerationMultiplier = (float)accelerationMultiplier;
             if (unscaledTime != null) UnscaledTime = (bool)unscaledTime;
 
-            CurrentValue = Math.Follow((float)CurrentValue, TargetValue, ref currentAcceleration, ref currentVelocity,
+            CurrentValue = ((float) CurrentValue).Follow(TargetValue, ref currentAcceleration, ref currentVelocity,
                 AccelerationMultiplier, Damping, AccelerationCurve, GetDelta());
             return (float)CurrentValue;
         }
@@ -73,9 +73,9 @@ namespace EssentialUtils
             if (unscaledTime != null) UnscaledTime = (bool)unscaledTime;
 
             CurrentValue = new(
-                Math.Follow(((Vector2)CurrentValue).x, TargetValue.x, ref currentAcceleration.x, ref currentVelocity.x,
+                (((Vector2)CurrentValue).x).Follow(TargetValue.x, ref currentAcceleration.x, ref currentVelocity.x,
                     AccelerationMultiplier, Damping, AccelerationCurve, GetDelta()),
-                Math.Follow(((Vector2)CurrentValue).y, TargetValue.y, ref currentAcceleration.y, ref currentVelocity.y,
+                (((Vector2)CurrentValue).y).Follow(TargetValue.y, ref currentAcceleration.y, ref currentVelocity.y,
                     AccelerationMultiplier, Damping, AccelerationCurve, GetDelta())
             );
 
@@ -114,11 +114,11 @@ namespace EssentialUtils
             if (unscaledTime != null) UnscaledTime = (bool)unscaledTime;
 
             CurrentValue = new(
-                Math.Follow(((Vector3)CurrentValue).x, TargetValue.x, ref currentAcceleration.x, ref currentVelocity.x,
+                (((Vector3)CurrentValue).x).Follow(TargetValue.x, ref currentAcceleration.x, ref currentVelocity.x,
                     AccelerationMultiplier, Damping, AccelerationCurve, GetDelta()),
-                Math.Follow(((Vector3)CurrentValue).y, TargetValue.y, ref currentAcceleration.y, ref currentVelocity.y,
+                (((Vector3)CurrentValue).y).Follow(TargetValue.y, ref currentAcceleration.y, ref currentVelocity.y,
                     AccelerationMultiplier, Damping, AccelerationCurve, GetDelta()),
-                Math.Follow(((Vector3)CurrentValue).z, TargetValue.z, ref currentAcceleration.z, ref currentVelocity.z,
+                (((Vector3)CurrentValue).y).Follow(TargetValue.y, ref currentAcceleration.y, ref currentVelocity.y,
                     AccelerationMultiplier, Damping, AccelerationCurve, GetDelta())
             );
 

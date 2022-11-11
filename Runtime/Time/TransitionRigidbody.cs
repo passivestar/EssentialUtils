@@ -29,7 +29,7 @@ namespace EssentialUtils
             if (AffectRotation)
             {
                 var rotationDifference = newRotation * Quaternion.Inverse(rigidbody.transform.rotation);
-                rigidbody.angularVelocity = Math.ExtractEulersFromQuaternion(rotationDifference) * RotationSpeed;
+                rigidbody.angularVelocity = rotationDifference.ExtractEulers() * RotationSpeed;
             }
         }
     }
