@@ -35,7 +35,7 @@ namespace EssentialUtils
                 viewportPoint.y = Mathf.Clamp(viewportPoint.y, offScreenMargin, 1f - offScreenMargin);
 
                 // Will stick to the vertical center of the screen when offscreen
-                viewportPoint.y = Math.MapRange(viewportPoint.z, 0f, 10f, .5f, viewportPoint.y);
+                viewportPoint.y = viewportPoint.z.MapRange(0f, 10f, .5f, viewportPoint.y);
             }
 
             transform.position = new(viewportPoint.x * Screen.width, viewportPoint.y * Screen.height, 0f);
