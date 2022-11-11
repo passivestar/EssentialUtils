@@ -11,31 +11,13 @@ namespace EssentialUtils
         collision events
     */
 
-    public class MonoBehaviourHelper : MonoBehaviour
+    public class MonoBehaviourHelper : MonoBehaviourWithGlobalInstance<MonoBehaviourHelper>
     {
         public event Action onAwake, onStart, onUpdate, onFixedUpdate, onLateUpdate, onEnable, onDisable,
             onGUI, onDrawGizmos, onDrawGizmosSelected;
 
         public event Action<Collision> onCollisionEnter, onCollisionExit, onCollisionStay;
         public event Action<Collider> onTriggerEnter, onTriggerExit, onTriggerStay;
-
-        static MonoBehaviourHelper instance = null;
-
-        public static MonoBehaviourHelper Instance
-        {
-            get
-            {
-                if (instance != null)
-                {
-                    return instance;
-                }
-                var gameObject = new GameObject();
-                gameObject.name = "EssentialUtils_MonoBehaviourHelper";
-                instance = gameObject.AddComponent<MonoBehaviourHelper>();
-                DontDestroyOnLoad(gameObject);
-                return instance;
-            }
-        }
 
         public static MonoBehaviourHelper OnGameObject(GameObject gameObject)
         {
