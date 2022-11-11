@@ -117,5 +117,10 @@ namespace EssentialUtils
                 Object.Destroy(child.gameObject);
             }
         }
+
+        public static void DrawRay(this Transform transform, Vector3 dir, Color color = new(), float duration = 1f)
+        {
+            Debug.DrawRay(transform.position, dir, color, duration);
+        }
     }
 }
