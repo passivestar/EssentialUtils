@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 namespace EssentialUtils
@@ -34,6 +35,12 @@ namespace EssentialUtils
             velocity += acceleration * delta;
             velocity = Mathf.Lerp(velocity, 0, damping * delta);
             return current + velocity * delta;
+        }
+
+        public static string FormatTime(this float time, string format = "m\\:ss\\.fff")
+        {
+            var timeSpan = new TimeSpan((long)(time * TimeSpan.TicksPerSecond));
+            return timeSpan.ToString(format);
         }
     }
 }
