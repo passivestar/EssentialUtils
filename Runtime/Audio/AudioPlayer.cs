@@ -100,6 +100,7 @@ namespace EssentialUtils
 
         public void PlayOneShot(AudioClip clip, float volume = 1f, float pitchMin = .9f, float pitchMax = 1.1f)
         {
+            sourceA.clip = clip;
             sourceA.volume = volume;
             sourceA.pitch = UnityEngine.Random.Range(pitchMin, pitchMax);
             sourceA.PlayOneShot(clip);
