@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace EssentialUtils
 {
-    public class Noise
+    public static class Noise
     {
         const float ComponentOffset = 1111.1111f;
 
