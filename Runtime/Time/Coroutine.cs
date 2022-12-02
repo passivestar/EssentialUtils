@@ -3,6 +3,7 @@ using System.Collections;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.Networking;
+using UnityEngine.Events;
 
 namespace EssentialUtils
 {
@@ -132,7 +133,7 @@ namespace EssentialUtils
             }
         }
 
-        static Coroutine WaitForWebRequest(string url, string method)
+        public static Coroutine WaitForWebRequest(string url, string method)
         {
             return Run(WaitForWebRequestCoroutine(url, method));
         }
@@ -142,6 +143,20 @@ namespace EssentialUtils
             var request = new UnityWebRequest(url, method);
             request.downloadHandler = new DownloadHandlerBuffer();
             yield return request.SendWebRequest();
+        }
+
+        public static Coroutine WaitForUnityEvent<T>(UnityEvent<T> unityEvent)
+        {
+            return Run(WaitForUnityEventCoroutine(unityEvent));
+        }
+
+        static IEnumerator WaitForUnityEventCoroutine<T>(UnityEvent<T> unityEvent)
+        {
+            var coroutine = new Coroutine();
+            var listener = new UnityAction<T>(_ => coroutine.Finish());
+            unityEvent.AddListener(listener);
+            yield return coroutine;
+            unityEvent.RemoveListener(listener);
         }
     }
 }
