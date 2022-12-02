@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.Networking;
 
 namespace EssentialUtils
 {
@@ -129,6 +130,18 @@ namespace EssentialUtils
             {
                 yield return null;
             }
+        }
+
+        static Coroutine WaitForWebRequest(string url, string method)
+        {
+            return Run(WaitForWebRequestCoroutine(url, method));
+        }
+
+        static IEnumerator WaitForWebRequestCoroutine(string url, string method)
+        {
+            var request = new UnityWebRequest(url, method);
+            request.downloadHandler = new DownloadHandlerBuffer();
+            yield return request.SendWebRequest();
         }
     }
 }
