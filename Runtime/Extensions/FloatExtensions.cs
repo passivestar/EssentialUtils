@@ -42,5 +42,20 @@ namespace EssentialUtils
             var timeSpan = new TimeSpan((long)(time * TimeSpan.TicksPerSecond));
             return timeSpan.ToString(format);
         }
+
+        public static float RoundToGrid(this float value, float grid)
+        {
+            return Mathf.Round(value / grid) * grid;
+        }
+
+        public static float FloorToGrid(this float value, float grid)
+        {
+            return Mathf.Floor(value / grid) * grid;
+        }
+
+        public static float CeilToGrid(this float value, float grid)
+        {
+            return Mathf.Ceil(value / grid) * grid;
+        }
     }
 }
