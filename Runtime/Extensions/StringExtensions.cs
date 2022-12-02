@@ -6,27 +6,22 @@ namespace EssentialUtils
     {
         public static string SnakeToCamel(this string str)
         {
-            var words = str.Split('_');
-            var camel = words[0];
-            for (var i = 1; i < words.Length; ++i)
-            {
-                camel += words[i].Substring(0, 1).ToUpper() + words[i].Substring(1);
-            }
-            return camel;
+            return string.Concat(str.Split('_').Select(word => word.Substring(0, 1).ToUpper() + word.Substring(1)));
         }
 
         public static string CamelToSnake(this string str)
         {
-            var snake = "";
-            for (var i = 0; i < str.Length; ++i)
-            {
-                if (i > 0 && char.IsUpper(str[i]))
-                {
-                    snake += "_";
-                }
-                snake += char.ToLower(str[i]);
-            }
-            return snake;
+            return string.Concat(str.Select((c, i) => i > 0 && char.IsUpper(c) ? "_" + c : c.ToString())).ToLower();
+        }
+
+        public static string PathStart(this string path)
+        {
+            return path[0..(path.LastIndexOf('.') + 1)];
+        }
+
+        public static string PathEnd(this string path)
+        {
+            return path[(path.LastIndexOf('.') + 1)..];
         }
     }
 }
